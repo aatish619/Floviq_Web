@@ -880,7 +880,7 @@ h3 {
 }
 
 .info-item a,
-.info-item span {
+.info-item div span {
   color: var(--muted);
   transition: color 200ms ease;
 }
