@@ -8,14 +8,14 @@
       content="Floviq builds AI automation workflows, WhatsApp automation, lead management systems, AI customer support, and business process automation for modern businesses."
     />
     <title>Floviq | AI Automation & Workflow Systems</title>
-    <link rel="icon" type="image/png" href="assets/Floviq-image.png" />
+    <link rel="icon" type="image/png" href="assets/images/Floviq-image.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div class="site-shell">
@@ -23,10 +23,11 @@
       <div class="ambient ambient-two"></div>
       <div class="grid-glow"></div>
 
+      <!-- Header Section -->
       <header class="site-header" id="top">
         <nav class="navbar" aria-label="Main navigation">
           <a href="#top" class="brand" aria-label="Floviq home">
-            <img class="brand-logo" src="assets/Floviq-image.png" alt="Floviq" />
+            <img class="brand-logo" src="assets/images/Floviq-image.png" alt="Floviq" />
           </a>
 
           <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
@@ -46,7 +47,9 @@
         </nav>
       </header>
 
+      <!-- Main Content -->
       <main>
+        <!-- Hero Section -->
         <section class="hero section">
           <div class="hero-copy reveal">
             <p class="eyebrow">AI automation for operational teams</p>
@@ -101,6 +104,7 @@
           </div>
         </section>
 
+        <!-- About Section -->
         <section class="section split-section" id="about">
           <div class="section-copy reveal">
             <p class="eyebrow">About Floviq</p>
@@ -121,6 +125,7 @@
           </div>
         </section>
 
+        <!-- Capability Section -->
         <section class="section capability-section" aria-label="What Floviq helps automate">
           <div class="section-heading reveal">
             <p class="eyebrow">What we improve</p>
@@ -151,6 +156,7 @@
           </div>
         </section>
 
+        <!-- Services Section -->
         <section class="section" id="services">
           <div class="section-heading reveal">
             <p class="eyebrow">Services</p>
@@ -191,6 +197,7 @@
           </div>
         </section>
 
+        <!-- Why Floviq Section -->
         <section class="section why-section" id="why">
           <div class="section-heading reveal">
             <p class="eyebrow">Why Floviq</p>
@@ -230,6 +237,7 @@
           </div>
         </section>
 
+        <!-- Process Section -->
         <section class="section" id="process">
           <div class="section-heading reveal">
             <p class="eyebrow">Process</p>
@@ -255,6 +263,7 @@
           </div>
         </section>
 
+        <!-- Build Section -->
         <section class="section build-section">
           <div class="build-card reveal">
             <div>
@@ -270,23 +279,25 @@
           </div>
         </section>
 
+        <!-- Audit CTA Section -->
         <section class="section cta-section" id="audit-cta">
-          <div class="section-heading reveal" style="text-align: center; max-width: 800px; margin: 0 auto 42px;">
+          <div class="section-heading reveal cta-heading">
             <p class="eyebrow">Free Audit</p>
             <h2>Get Your Free AI Automation Audit</h2>
-            <p class="hero-subtitle" style="margin: 0 auto 24px;">
+            <p class="hero-subtitle cta-subtitle">
               Tell us about one manual process in your business. Floviq will analyze it and suggest how AI automation can save time, reduce manual work, and improve conversions.
             </p>
             <a class="button primary" href="#audit-form">Analyze My Business</a>
           </div>
         </section>
 
+        <!-- Audit Form Section -->
         <section class="section audit-section" id="audit-form">
           <div class="contact-layout">
             <div class="contact-info reveal">
               <p class="eyebrow">How it works</p>
               <h3>3 Simple Steps</h3>
-              <div class="info-items" style="margin-top: 24px;">
+              <div class="info-items audit-info-items">
                 <div class="info-item">
                   <span class="info-icon">1</span>
                   <div>
@@ -311,22 +322,22 @@
               </div>
             </div>
 
-            <div class="glass-panel reveal" style="padding: clamp(24px, 4vw, 42px);">
+            <div class="glass-panel reveal audit-panel">
               <form id="ai-audit-form" class="audit-form-grid" novalidate>
                 <div class="form-group">
                   <label for="audit-name">Full Name *</label>
                   <input type="text" id="audit-name" name="name" placeholder="John Doe" required>
-                  <span class="error-msg" style="color: #ff5f5f; font-size: 0.8rem; display: none;">Full name is required.</span>
+                  <span class="error-msg">Full name is required.</span>
                 </div>
                 <div class="form-group">
                   <label for="audit-business">Business Name *</label>
                   <input type="text" id="audit-business" name="businessName" placeholder="Acme Corp" required>
-                  <span class="error-msg" style="color: #ff5f5f; font-size: 0.8rem; display: none;">Business name is required.</span>
+                  <span class="error-msg">Business name is required.</span>
                 </div>
                 <div class="form-group">
                   <label for="audit-email">Email Address *</label>
                   <input type="email" id="audit-email" name="email" placeholder="john@company.com" required>
-                  <span class="error-msg" style="color: #ff5f5f; font-size: 0.8rem; display: none;">Valid email is required.</span>
+                  <span class="error-msg">Valid email is required.</span>
                 </div>
                 <div class="form-group">
                   <label for="audit-phone">Phone / WhatsApp</label>
@@ -343,18 +354,18 @@
                 <div class="form-group full-width">
                   <label for="audit-contact">Preferred Contact Method</label>
                   <select id="audit-contact" name="preferredContact" class="custom-select">
-                    <option value="email">Email</option>
-                    <option value="whatsapp">WhatsApp</option>
-                    <option value="phone">Phone Call</option>
+                    <option value="Email">Email</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Phone">Phone</option>
                   </select>
                 </div>
                 <div class="form-group full-width">
                   <label for="audit-problem">What process do you want to automate? *</label>
                   <textarea id="audit-problem" name="automationProblem" rows="4" placeholder="Describe the manual work..." required></textarea>
-                  <span class="error-msg" style="color: #ff5f5f; font-size: 0.8rem; display: none;">Please describe the process you want to automate.</span>
+                  <span class="error-msg">Please describe the process you want to automate.</span>
                 </div>
 
-                <div class="form-group full-width form-feedback" style="display: none; padding: 14px; border-radius: 12px; margin-top: 8px; font-weight: 600; text-align: center;"></div>
+                <div class="form-group full-width form-feedback"></div>
 
                 <button type="submit" class="button primary submit-btn" id="audit-submit-btn">Analyze My Business</button>
               </form>
@@ -362,6 +373,7 @@
           </div>
         </section>
 
+        <!-- Contact Section -->
         <section class="contact-section section" id="contact">
           <div class="section-heading reveal">
             <p class="eyebrow">Contact</p>
@@ -405,7 +417,7 @@
               </div>
             </div>
 
-            <form class="contact-form reveal" action="#" method="POST" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+            <form class="contact-form reveal" id="general-contact-form" action="#" method="POST">
               <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" placeholder="John Doe" required>
@@ -432,14 +444,15 @@
         </section>
       </main>
 
+      <!-- Footer Section -->
       <footer class="site-footer">
         <a href="#top" class="brand">
-          <img class="brand-logo" src="assets/Floviq-image.png" alt="Floviq" />
+          <img class="brand-logo" src="assets/images/Floviq-image.png" alt="Floviq" />
         </a>
         <p>AI automation and workflow systems for modern businesses.</p>
       </footer>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
