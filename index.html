@@ -270,6 +270,98 @@
           </div>
         </section>
 
+        <section class="section cta-section" id="audit-cta">
+          <div class="section-heading reveal" style="text-align: center; max-width: 800px; margin: 0 auto 42px;">
+            <p class="eyebrow">Free Audit</p>
+            <h2>Get Your Free AI Automation Audit</h2>
+            <p class="hero-subtitle" style="margin: 0 auto 24px;">
+              Tell us about one manual process in your business. Floviq will analyze it and suggest how AI automation can save time, reduce manual work, and improve conversions.
+            </p>
+            <a class="button primary" href="#audit-form">Analyze My Business</a>
+          </div>
+        </section>
+
+        <section class="section audit-section" id="audit-form">
+          <div class="contact-layout">
+            <div class="contact-info reveal">
+              <p class="eyebrow">How it works</p>
+              <h3>3 Simple Steps</h3>
+              <div class="info-items" style="margin-top: 24px;">
+                <div class="info-item">
+                  <span class="info-icon">1</span>
+                  <div>
+                    <strong>Share your workflow problem</strong>
+                    <span>Tell us what's slowing you down.</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <span class="info-icon">2</span>
+                  <div>
+                    <strong>AI analyzes opportunities</strong>
+                    <span>Our system evaluates feasibility and impact.</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <span class="info-icon">3</span>
+                  <div>
+                    <strong>Get personalized recommendation</strong>
+                    <span>Receive a step-by-step automation plan.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-panel reveal" style="padding: clamp(24px, 4vw, 42px);">
+              <form id="ai-audit-form" class="audit-form-grid" novalidate>
+                <div class="form-group">
+                  <label for="audit-name">Full Name *</label>
+                  <input type="text" id="audit-name" name="name" placeholder="John Doe" required>
+                  <span class="error-msg" style="color: #ff5f5f; font-size: 0.8rem; display: none;">Full name is required.</span>
+                </div>
+                <div class="form-group">
+                  <label for="audit-business">Business Name *</label>
+                  <input type="text" id="audit-business" name="businessName" placeholder="Acme Corp" required>
+                  <span class="error-msg" style="color: #ff5f5f; font-size: 0.8rem; display: none;">Business name is required.</span>
+                </div>
+                <div class="form-group">
+                  <label for="audit-email">Email Address *</label>
+                  <input type="email" id="audit-email" name="email" placeholder="john@company.com" required>
+                  <span class="error-msg" style="color: #ff5f5f; font-size: 0.8rem; display: none;">Valid email is required.</span>
+                </div>
+                <div class="form-group">
+                  <label for="audit-phone">Phone / WhatsApp</label>
+                  <input type="tel" id="audit-phone" name="phone" placeholder="+1 234 567 8900">
+                </div>
+                <div class="form-group">
+                  <label for="audit-industry">Industry</label>
+                  <input type="text" id="audit-industry" name="industry" placeholder="e.g. E-commerce">
+                </div>
+                <div class="form-group">
+                  <label for="audit-volume">Monthly Lead/Customer Volume</label>
+                  <input type="text" id="audit-volume" name="monthlyVolume" placeholder="e.g. 500+">
+                </div>
+                <div class="form-group full-width">
+                  <label for="audit-contact">Preferred Contact Method</label>
+                  <select id="audit-contact" name="preferredContact" class="custom-select">
+                    <option value="email">Email</option>
+                    <option value="whatsapp">WhatsApp</option>
+                    <option value="phone">Phone Call</option>
+                  </select>
+                </div>
+                <div class="form-group full-width">
+                  <label for="audit-problem">What process do you want to automate? *</label>
+                  <textarea id="audit-problem" name="automationProblem" rows="4" placeholder="Describe the manual work..." required></textarea>
+                  <span class="error-msg" style="color: #ff5f5f; font-size: 0.8rem; display: none;">Please describe the process you want to automate.</span>
+                </div>
+
+                <div class="form-group full-width form-feedback" style="display: none; padding: 14px; border-radius: 12px; margin-top: 8px; font-weight: 600; text-align: center;"></div>
+
+                <button type="submit" class="button primary submit-btn" id="audit-submit-btn">Analyze My Business</button>
+              </form>
+            </div>
+          </div>
+        </section>
+
         <section class="contact-section section" id="contact">
           <div class="section-heading reveal">
             <p class="eyebrow">Contact</p>
