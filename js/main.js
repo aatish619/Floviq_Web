@@ -1,4 +1,3 @@
-
 // ============================================================
 // --- Navigation Logic ---
 // ============================================================
@@ -74,21 +73,22 @@ if (generalContactForm) {
 }
 
 // ============================================================
-// --- AI Lead Audit Form ---
+// --- Consultation Form (formerly AI Lead Audit) ---
 // ============================================================
 
-// Webhook URL — replace with your live n8n endpoint when ready
+// Webhook URL — replace with your live endpoint when ready
 const WEBHOOK_URL = "https://your-n8n-domain/webhook/floviq-lead-audit";
 
-const auditForm     = document.getElementById("ai-audit-form");
+const auditForm = document.getElementById("ai-audit-form");
 const auditSubmitBtn = document.getElementById("audit-submit-btn");
-const formFeedback  = auditForm ? auditForm.querySelector(".form-feedback") : null;
+const formFeedback = auditForm ? auditForm.querySelector(".form-feedback") : null;
 
 // Guard flag — prevents duplicate rapid submissions
 let isSubmitting = false;
 
 /**
- * showFieldError — reveals the error <span> directly after the given input.
+ * Show error message for a specific form field.
+ * @param {string} inputId - The ID of the input element.
  */
 function showFieldError(inputId) {
   const input = document.getElementById(inputId);
@@ -100,9 +100,10 @@ function showFieldError(inputId) {
 }
 
 /**
- * clearAllErrors — hides all field-level error messages and the feedback banner.
+ * Hide all field-level error messages and the feedback banner.
  */
 function clearAllErrors() {
+  if (!auditForm) return;
   auditForm.querySelectorAll(".error-msg").forEach((el) => {
     el.style.display = "none";
   });
@@ -114,7 +115,7 @@ function clearAllErrors() {
 }
 
 /**
- * showFeedback — displays a success or error banner inside the form.
+ * Display a success or error banner inside the form.
  * @param {"success"|"error"} type
  * @param {string} message
  */
@@ -123,21 +124,21 @@ function showFeedback(type, message) {
   formFeedback.textContent = message;
   formFeedback.classList.add(type);
   formFeedback.style.display = "block";
-  // Smoothly scroll the banner into view
   formFeedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 /**
- * setLoadingState — toggles the submit button between idle and loading states.
+ * Toggle the submit button between idle and loading states.
  * @param {boolean} loading
  */
 function setLoadingState(loading) {
+  if (!auditSubmitBtn) return;
   auditSubmitBtn.disabled = loading;
-  auditSubmitBtn.textContent = loading ? "Analyzing..." : "Analyze My Business";
+  auditSubmitBtn.textContent = loading ? "Submitting..." : "Book a Consultation";
 }
 
 /**
- * validateForm — runs all field validations and returns true if the form is valid.
+ * Validate all required form fields. Returns true if valid.
  * @returns {boolean}
  */
 function validateForm() {
@@ -172,26 +173,26 @@ function validateForm() {
 }
 
 /**
- * buildPayload — collects, trims, and normalizes form values into the final payload.
+ * Collect, trim, and normalize form values into the submission payload.
  * @returns {Object}
  */
 function buildPayload() {
   return {
-    name:             document.getElementById("audit-name").value.trim(),
-    businessName:     document.getElementById("audit-business").value.trim(),
-    email:            document.getElementById("audit-email").value.trim(),
-    phone:            document.getElementById("audit-phone").value.trim(),
-    industry:         document.getElementById("audit-industry").value.trim(),
-    automationProblem: document.getElementById("audit-problem").value.trim(),
-    monthlyVolume:    document.getElementById("audit-volume").value.trim(),
-    preferredContact: document.getElementById("audit-contact").value, // Already normalized: Email | WhatsApp | Phone
-    source:           "Floviq Website",
-    page:             "homepage-ai-audit",
-    submittedAt:      new Date().toISOString(),
+    name:               document.getElementById("audit-name").value.trim(),
+    businessName:       document.getElementById("audit-business").value.trim(),
+    email:              document.getElementById("audit-email").value.trim(),
+    phone:              document.getElementById("audit-phone").value.trim(),
+    industry:           document.getElementById("audit-industry").value.trim(),
+    serviceInterest:    document.getElementById("audit-service")?.value || "",
+    projectDescription: document.getElementById("audit-problem").value.trim(),
+    preferredContact:   document.getElementById("audit-contact").value,
+    source:             "Floviq Website V2",
+    page:               "homepage-consultation",
+    submittedAt:        new Date().toISOString(),
   };
 }
 
-// Wire up the form submission
+// Wire up the consultation form submission
 if (auditForm) {
   auditForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -206,7 +207,7 @@ if (auditForm) {
 
     // Build and log payload before sending
     const payload = buildPayload();
-    console.log("Submitting AI audit payload:", payload);
+    console.log("Submitting consultation payload:", payload);
 
     // Enter loading state
     isSubmitting = true;
@@ -223,15 +224,15 @@ if (auditForm) {
         throw new Error(`Server responded with status ${response.status}`);
       }
 
-      console.log("AI audit submitted successfully");
+      console.log("Consultation request submitted successfully");
       showFeedback(
         "success",
-        "Thanks! Our AI is analyzing your automation opportunity. You'll receive a personalized recommendation shortly."
+        "Thanks! We've received your request. Our team will review your project and get back to you shortly."
       );
       auditForm.reset();
 
     } catch (error) {
-      console.error("AI audit submission failed:", error);
+      console.error("Consultation submission failed:", error);
       showFeedback(
         "error",
         "Something went wrong while submitting your request. Please try again or contact us directly."
@@ -242,5 +243,3 @@ if (auditForm) {
     }
   });
 }
-
-

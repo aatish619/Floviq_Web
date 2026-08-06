@@ -94,7 +94,7 @@ button {
   top: 0;
   z-index: 20;
   padding: 18px clamp(18px, 4vw, 54px);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(24px);
   transition: background 200ms ease;
 }
 
@@ -110,9 +110,10 @@ button {
   max-width: 1180px;
   margin: 0 auto;
   padding: 12px 14px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 22px;
   background: rgba(5, 8, 18, 0.72);
+  backdrop-filter: blur(24px);
   box-shadow: 0 18px 70px rgba(0, 0, 0, 0.24);
 }
 
@@ -184,7 +185,12 @@ button {
 
 .nav-cta:hover,
 .button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.nav-cta:hover,
+.button.primary:hover {
+  box-shadow: 0 20px 50px rgba(95, 140, 255, 0.45);
 }
 
 .button.secondary:hover {
@@ -217,7 +223,7 @@ button {
   z-index: 1;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 112px clamp(18px, 4vw, 34px);
+  padding: 140px clamp(18px, 4vw, 34px);
 }
 
 /* --- Hero Section --- */
@@ -247,6 +253,11 @@ h2,
 h3,
 p {
   margin-top: 0;
+}
+
+h1, h2, h3 {
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.02em;
 }
 
 h1 {
@@ -386,8 +397,8 @@ h3 {
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 20px;
   background: rgba(10, 18, 40, 0.78);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   animation: float 6s ease-in-out infinite;
 }
 
@@ -511,11 +522,12 @@ h3 {
 .service-card,
 .process-step,
 .contact-card,
-.why-item {
-  border: 1px solid var(--line);
+.why-item,
+.project-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
   background: var(--glass);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .glass-panel {
@@ -546,36 +558,67 @@ h3 {
   gap: 18px;
 }
 
-/* --- Capability Section --- */
-.capability-section {
+/* --- Technologies Section --- */
+.tech-section {
   padding-top: 56px;
 }
 
-.capability-strip {
+.tech-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
 }
 
-.capability {
-  min-height: 270px;
-  border-top: 1px solid var(--line);
-  padding: 22px 16px 0 0;
+.tech-category {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 24px;
+  background: var(--glass);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: transform 220ms ease, border-color 220ms ease;
 }
 
-.capability span {
-  display: inline-flex;
-  margin-bottom: 44px;
+.tech-category:hover {
+  transform: translateY(-4px);
+  border-color: rgba(61, 232, 255, 0.3);
+}
+
+.tech-category-title {
+  margin-bottom: 16px;
   color: var(--cyan);
-  font-size: 0.8rem;
-  font-weight: 900;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
-.capability p {
-  margin-bottom: 0;
-  color: var(--muted);
+.tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  border: 1px solid rgba(175, 209, 255, 0.14);
+  border-radius: 999px;
+  padding: 0 14px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: background 200ms ease, border-color 200ms ease;
+}
+
+.tech-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(61, 232, 255, 0.3);
+}
+
+/* --- Service Cards --- */
 .service-card {
   position: relative;
   min-height: 246px;
@@ -595,9 +638,10 @@ h3 {
 }
 
 .service-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(61, 232, 255, 0.36);
+  transform: translateY(-8px);
+  border-color: rgba(61, 232, 255, 0.45);
   background: var(--glass-strong);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 20px rgba(61, 232, 255, 0.15);
 }
 
 .service-card:hover::before {
@@ -617,6 +661,11 @@ h3 {
   background: linear-gradient(135deg, var(--cyan), var(--blue), var(--purple));
 }
 
+.service-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
 .service-card h3,
 .service-card p {
   position: relative;
@@ -624,6 +673,70 @@ h3 {
 
 .service-card p,
 .process-step p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+/* --- Projects Section --- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.project-card {
+  position: relative;
+  min-height: 220px;
+  border-radius: 24px;
+  padding: 24px;
+  overflow: hidden;
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 10%, rgba(168, 85, 247, 0.16), transparent 32%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(168, 85, 247, 0.4);
+  background: var(--glass-strong);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 20px rgba(168, 85, 247, 0.12);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  color: #06101f;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--purple), var(--violet), var(--blue));
+}
+
+.project-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.project-card h3,
+.project-card p {
+  position: relative;
+}
+
+.project-card p {
   margin-bottom: 0;
   color: var(--muted);
 }
@@ -814,7 +927,7 @@ h3 {
   box-shadow: 0 0 18px rgba(113, 240, 200, 0.7);
 }
 
-/* --- Contact & Audit Forms --- */
+/* --- Contact & Consultation Forms --- */
 .contact-section {
   padding-bottom: 86px;
 }
@@ -1009,7 +1122,7 @@ h3 {
 }
 
 
-/* --- New Audit Section Styles --- */
+/* --- CTA & Consultation Section Styles --- */
 .cta-heading {
   text-align: center;
   max-width: 800px;
@@ -1053,8 +1166,8 @@ h3 {
 
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 700ms ease, transform 700ms ease;
+  transform: translateY(30px);
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.visible {
@@ -1171,7 +1284,8 @@ h3 {
 
   .services-grid,
   .process-grid,
-  .capability-strip {
+  .projects-grid,
+  .tech-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1251,7 +1365,8 @@ h3 {
 
   .services-grid,
   .process-grid,
-  .capability-strip,
+  .projects-grid,
+  .tech-grid,
   .contact-form,
   .audit-form-grid {
     grid-template-columns: 1fr;
@@ -1272,17 +1387,13 @@ h3 {
     text-align: center;
   }
 
-  .capability {
+  .tech-category {
     min-height: auto;
-    padding-bottom: 22px;
-  }
-
-  .capability span {
-    margin-bottom: 24px;
   }
 
   .service-card,
-  .process-step {
+  .process-step,
+  .project-card {
     min-height: auto;
   }
 
