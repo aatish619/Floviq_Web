@@ -63,8 +63,8 @@ window.addEventListener(
 // --- Contact & Consultation Form ---
 // ============================================================
 
-// Webhook URL — replace with your live endpoint when ready
-const WEBHOOK_URL = "https://your-n8n-domain/webhook/floviq-contact";
+// Web3Forms API endpoint
+const WEB3FORMS_URL = "https://api.web3forms.com/submit";
 
 const contactForm = document.getElementById("general-contact-form");
 const contactSubmitBtn = document.getElementById("contact-submit-btn");
@@ -109,7 +109,7 @@ function clearAllErrors() {
 function showFeedback(type, message) {
   if (!formFeedback) return;
   formFeedback.textContent = message;
-  formFeedback.classList.add(type);
+  formFeedback.className = `form-group full-width form-feedback ${type}`;
   formFeedback.style.display = "block";
   formFeedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
@@ -154,18 +154,21 @@ function validateForm() {
 }
 
 /**
- * Collect, trim, and normalize form values into the submission payload.
+ * Collect, trim, and normalize form values into the Web3Forms submission payload.
  * @returns {Object}
  */
 function buildPayload() {
+  const userKey = window.ENV?.WEB3FORMS_KEY || "";
+  
   return {
+    access_key:      userKey,
+    subject:         "New Lead - Floviq Contact Form",
+    from_name:       "Floviq Website",
     name:            document.getElementById("contact-name").value.trim(),
     email:           document.getElementById("contact-email").value.trim(),
     company:         document.getElementById("contact-company").value.trim(),
-    serviceInterest: document.getElementById("contact-service")?.value || "",
+    serviceInterest: document.getElementById("contact-service")?.value || "General Inquiry",
     message:         document.getElementById("contact-message").value.trim(),
-    source:          "Floviq Website V2",
-    page:            "homepage-contact",
     submittedAt:     new Date().toISOString(),
   };
 }
@@ -183,8 +186,17 @@ if (contactForm) {
     // Validate — stop early if any field fails
     if (!validateForm()) return;
 
-    // Build and log payload before sending
+    // Check if configuration key is present
     const payload = buildPayload();
+    if (!payload.access_key || payload.access_key === "YOUR_ACCESS_KEY_HERE") {
+      console.warn("Web3Forms Access Key is missing in config.js");
+      showFeedback(
+        "error",
+        "Form configuration is incomplete. Please add your Web3Forms Access Key to config.js."
+      );
+      return;
+    }
+
     console.log("Submitting contact payload:", payload);
 
     // Enter loading state
@@ -192,17 +204,19 @@ if (contactForm) {
     setLoadingState(true);
 
     try {
-      const response = await fetch(WEBHOOK_URL, {
+      const response = await fetch(WEB3FORMS_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      if (!response.ok) {
-        throw new Error(`Server responded with status ${response.status}`);
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || `Server responded with status ${response.status}`);
       }
 
-      console.log("Contact request submitted successfully");
+      console.log("Contact request submitted successfully:", data);
       showFeedback(
         "success",
         "Thanks! Your message has been sent successfully. Our team will get back to you shortly."
