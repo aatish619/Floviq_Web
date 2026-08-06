@@ -60,28 +60,15 @@ window.addEventListener(
 );
 
 // ============================================================
-// --- General Contact Form ---
-// ============================================================
-
-const generalContactForm = document.getElementById("general-contact-form");
-
-if (generalContactForm) {
-  generalContactForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("Message sent successfully!");
-  });
-}
-
-// ============================================================
-// --- Consultation Form (formerly AI Lead Audit) ---
+// --- Contact & Consultation Form ---
 // ============================================================
 
 // Webhook URL — replace with your live endpoint when ready
-const WEBHOOK_URL = "https://your-n8n-domain/webhook/floviq-lead-audit";
+const WEBHOOK_URL = "https://your-n8n-domain/webhook/floviq-contact";
 
-const auditForm = document.getElementById("ai-audit-form");
-const auditSubmitBtn = document.getElementById("audit-submit-btn");
-const formFeedback = auditForm ? auditForm.querySelector(".form-feedback") : null;
+const contactForm = document.getElementById("general-contact-form");
+const contactSubmitBtn = document.getElementById("contact-submit-btn");
+const formFeedback = contactForm ? contactForm.querySelector(".form-feedback") : null;
 
 // Guard flag — prevents duplicate rapid submissions
 let isSubmitting = false;
@@ -103,8 +90,8 @@ function showFieldError(inputId) {
  * Hide all field-level error messages and the feedback banner.
  */
 function clearAllErrors() {
-  if (!auditForm) return;
-  auditForm.querySelectorAll(".error-msg").forEach((el) => {
+  if (!contactForm) return;
+  contactForm.querySelectorAll(".error-msg").forEach((el) => {
     el.style.display = "none";
   });
   if (formFeedback) {
@@ -132,9 +119,9 @@ function showFeedback(type, message) {
  * @param {boolean} loading
  */
 function setLoadingState(loading) {
-  if (!auditSubmitBtn) return;
-  auditSubmitBtn.disabled = loading;
-  auditSubmitBtn.textContent = loading ? "Submitting..." : "Book a Consultation";
+  if (!contactSubmitBtn) return;
+  contactSubmitBtn.disabled = loading;
+  contactSubmitBtn.textContent = loading ? "Sending..." : "Send Message";
 }
 
 /**
@@ -145,27 +132,21 @@ function validateForm() {
   let isValid = true;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const name = document.getElementById("audit-name").value.trim();
+  const name = document.getElementById("contact-name").value.trim();
   if (!name) {
-    showFieldError("audit-name");
+    showFieldError("contact-name");
     isValid = false;
   }
 
-  const businessName = document.getElementById("audit-business").value.trim();
-  if (!businessName) {
-    showFieldError("audit-business");
-    isValid = false;
-  }
-
-  const email = document.getElementById("audit-email").value.trim();
+  const email = document.getElementById("contact-email").value.trim();
   if (!email || !emailRegex.test(email)) {
-    showFieldError("audit-email");
+    showFieldError("contact-email");
     isValid = false;
   }
 
-  const problem = document.getElementById("audit-problem").value.trim();
-  if (!problem) {
-    showFieldError("audit-problem");
+  const message = document.getElementById("contact-message").value.trim();
+  if (!message) {
+    showFieldError("contact-message");
     isValid = false;
   }
 
@@ -178,23 +159,20 @@ function validateForm() {
  */
 function buildPayload() {
   return {
-    name:               document.getElementById("audit-name").value.trim(),
-    businessName:       document.getElementById("audit-business").value.trim(),
-    email:              document.getElementById("audit-email").value.trim(),
-    phone:              document.getElementById("audit-phone").value.trim(),
-    industry:           document.getElementById("audit-industry").value.trim(),
-    serviceInterest:    document.getElementById("audit-service")?.value || "",
-    projectDescription: document.getElementById("audit-problem").value.trim(),
-    preferredContact:   document.getElementById("audit-contact").value,
-    source:             "Floviq Website V2",
-    page:               "homepage-consultation",
-    submittedAt:        new Date().toISOString(),
+    name:            document.getElementById("contact-name").value.trim(),
+    email:           document.getElementById("contact-email").value.trim(),
+    company:         document.getElementById("contact-company").value.trim(),
+    serviceInterest: document.getElementById("contact-service")?.value || "",
+    message:         document.getElementById("contact-message").value.trim(),
+    source:          "Floviq Website V2",
+    page:            "homepage-contact",
+    submittedAt:     new Date().toISOString(),
   };
 }
 
-// Wire up the consultation form submission
-if (auditForm) {
-  auditForm.addEventListener("submit", async (e) => {
+// Wire up the contact form submission
+if (contactForm) {
+  contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     // Prevent rapid duplicate submissions
@@ -207,7 +185,7 @@ if (auditForm) {
 
     // Build and log payload before sending
     const payload = buildPayload();
-    console.log("Submitting consultation payload:", payload);
+    console.log("Submitting contact payload:", payload);
 
     // Enter loading state
     isSubmitting = true;
@@ -224,15 +202,15 @@ if (auditForm) {
         throw new Error(`Server responded with status ${response.status}`);
       }
 
-      console.log("Consultation request submitted successfully");
+      console.log("Contact request submitted successfully");
       showFeedback(
         "success",
-        "Thanks! We've received your request. Our team will review your project and get back to you shortly."
+        "Thanks! Your message has been sent successfully. Our team will get back to you shortly."
       );
-      auditForm.reset();
+      contactForm.reset();
 
     } catch (error) {
-      console.error("Consultation submission failed:", error);
+      console.error("Contact submission failed:", error);
       showFeedback(
         "error",
         "Something went wrong while submitting your request. Please try again or contact us directly."
